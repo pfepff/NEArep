@@ -6,26 +6,30 @@ var c = canvas.getContext("2d");
 
 class PreyBoid {
     constructor() {
-        this.rad = 30;
-        this.x = Math.random() * (canvas.width - this.rad * 2) + this.rad;
-        this.y = Math.random() * (canvas.height - this.rad * 2) + this.rad;
-        this.dx = 5;
-        this.dy = 5;
+        this.radius = 10;
+        this.x = Math.random() * (canvas.width - this.radius * 2) + this.radius;
+        this.y = Math.random() * (canvas.height - this.radius * 2) + this.radius;
+        this.dx = (Math.random() - 0.5) * 10;
+        this.dy = (Math.random() - 0.5) * 10;
     }
 
     drawPreyBoid() {
+        c.strokeStyle = "green"
         c.beginPath();
-        c.arc(this.x, this.y, this.rad, 0, Math.PI * 2, false);
+        c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        c.moveTo(this.x, this.y);
+        c.lineTo(this.x + this.dx * 2, this.y + this.dy * 2);
         c.stroke();
     }
 
     moveForward() {
-        if ((this.x + 30) > canvas.width || (this.x - this.rad) < 0) {
-            this.dx = -this.dx;
+//Edge collision and movement X
+        if ((this.x + this.radius) > canvas.width || (this.x - this.radius) < 0) {
+        this.dx = -this.dx;
         }
         this.x += this.dx;
-
-        if ((this.y + 30) > canvas.height || (this.y - this.rad) < 0) {
+//Edge collision and movement Y
+        if ((this.y + this.radius) > canvas.height || (this.y - this.radius) < 0) {
             this.dy = -this.dy;
         }
         this.y += this.dy;
@@ -33,7 +37,7 @@ class PreyBoid {
 }
 
 var CircleArray = [];
-var numBoids = 2;
+var numBoids = 10;
 
 for (var i = 0; i < numBoids; i++) {
     var boid = new PreyBoid();
@@ -49,5 +53,4 @@ function update() {
         CircleArray[i].drawPreyBoid();
     }
 }
-
 update();
