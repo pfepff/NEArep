@@ -13,7 +13,7 @@ class PreyBoid {
         this.dy = 5;
     }
 
-    drawCircle() {
+    drawPreyBoid() {
         c.beginPath();
         c.arc(this.x, this.y, this.rad, 0, Math.PI * 2, false);
         c.stroke();
@@ -30,20 +30,24 @@ class PreyBoid {
         }
         this.y += this.dy;
     }
-
-    update() {
-        c.clearRect(0, 0, canvas.width, canvas.height);
-        this.moveForward();
-        this.drawCircle();
-        requestAnimationFrame(this.update.bind(this));
-    }
 }
 
 var CircleArray = [];
+var numBoids = 2;
 
-for (var i = 0; i < 5; i++) {
+for (var i = 0; i < numBoids; i++) {
     var boid = new PreyBoid();
     CircleArray.push(boid);
-    CircleArray[i].update();
 }
-console.log(CircleArray)
+
+function update() {
+    requestAnimationFrame(update);
+    c.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (var i = 0; i < CircleArray.length; i++) {
+        CircleArray[i].moveForward();
+        CircleArray[i].drawPreyBoid();
+    }
+}
+
+update();
