@@ -19,11 +19,7 @@ class PreyBoid {
         c.stroke();
     }
 
-    animation() {
-        requestAnimationFrame(this.animation.bind(this));
-
-        c.clearRect(0, 0, canvas.width, canvas.height);
-
+    moveForward() {
         if ((this.x + 30) > canvas.width || (this.x - this.rad) < 0) {
             this.dx = -this.dx;
         }
@@ -33,8 +29,13 @@ class PreyBoid {
             this.dy = -this.dy;
         }
         this.y += this.dy;
+    }
 
+    update() {
+        c.clearRect(0, 0, canvas.width, canvas.height);
+        this.moveForward();
         this.drawCircle();
+        requestAnimationFrame(this.update.bind(this));
     }
 }
 
@@ -43,6 +44,6 @@ var CircleArray = [];
 for (var i = 0; i < 5; i++) {
     var boid = new PreyBoid();
     CircleArray.push(boid);
-    CircleArray[i].animation();
+    CircleArray[i].update();
 }
 console.log(CircleArray)
