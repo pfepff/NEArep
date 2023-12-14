@@ -1,12 +1,12 @@
 var canvas = document.querySelector("canvas");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = (window.innerWidth / 1.3);
+canvas.height = (window.innerHeight / 1.2);
 
 var c = canvas.getContext("2d");
 
 class PreyBoid {
     constructor() {
-        this.radius = 10;
+        this.radius = 9;
         this.x = Math.random() * (canvas.width - this.radius * 2) + this.radius;
         this.y = Math.random() * (canvas.height - this.radius * 2) + this.radius;
         this.dx = (Math.random() - 0.5) * 10;
@@ -14,19 +14,8 @@ class PreyBoid {
     }
 
     drawPreyBoid() {
-        c.strokeStyle = "green";
+        c.strokeStyle = "black";
         c.fillStyle = "green";
-//Circle
-        // c.beginPath();
-        // c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        // c.moveTo(this.x, this.y);
-        // // Normalize the direction vector
-        // let mag = Math.sqrt(this.dx * this.dx + this.dy * this.dy);
-        // let normaldx = this.dx / mag;
-        // let normaldy = this.dy / mag;
-        // // Scale the normalized vector to the radius of the circle
-        // c.lineTo(this.x + normaldx * this.radius, this.y + normaldy * this.radius);
-        // c.stroke();
 //Triangle
         c.beginPath();
         // Calculate the angle of the normalized direction vector
@@ -40,7 +29,7 @@ class PreyBoid {
         c.fill();
     }
 
-    moveForward() {
+    takeStep() {
 //Edge collision and movement X
         if ((this.x + this.radius) > canvas.width || (this.x - this.radius) < 0) {
         this.dx = -this.dx;
@@ -54,21 +43,21 @@ class PreyBoid {
     }
 }
 
-var CircleArray = [];
-var numBoids = 10;
+var PreyArray = [];
+var numPrey = 20;
 
-for (var i = 0; i < numBoids; i++) {
+for (var i = 0; i < numPrey; i++) {
     var boid = new PreyBoid();
-    CircleArray.push(boid);
+    PreyArray.push(boid);
 }
 
 function update() {
     requestAnimationFrame(update);
     c.clearRect(0, 0, canvas.width, canvas.height);
 
-    for (var i = 0; i < CircleArray.length; i++) {
-        CircleArray[i].moveForward();
-        CircleArray[i].drawPreyBoid();
+    for (var i = 0; i < PreyArray.length; i++) {
+        PreyArray[i].takeStep();
+        PreyArray[i].drawPreyBoid();
     }
 }
 update();
