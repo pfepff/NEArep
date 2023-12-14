@@ -14,12 +14,30 @@ class PreyBoid {
     }
 
     drawPreyBoid() {
-        c.strokeStyle = "green"
+        c.strokeStyle = "green";
+        c.fillStyle = "green";
+//Circle
+        // c.beginPath();
+        // c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        // c.moveTo(this.x, this.y);
+        // // Normalize the direction vector
+        // let mag = Math.sqrt(this.dx * this.dx + this.dy * this.dy);
+        // let normaldx = this.dx / mag;
+        // let normaldy = this.dy / mag;
+        // // Scale the normalized vector to the radius of the circle
+        // c.lineTo(this.x + normaldx * this.radius, this.y + normaldy * this.radius);
+        // c.stroke();
+//Triangle
         c.beginPath();
-        c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        c.moveTo(this.x, this.y);
-        c.lineTo(this.x + this.dx * 2, this.y + this.dy * 2);
+        // Calculate the angle of the normalized direction vector
+        let angle = Math.atan2(this.dy, this.dx);
+        // Draw the triangle
+        c.moveTo(this.x + this.radius * Math.cos(angle), this.y + this.radius * Math.sin(angle));
+        c.lineTo(this.x + this.radius * Math.cos(angle - (3 * Math.PI / 4)), this.y + this.radius * Math.sin(angle - (3 * Math.PI / 4)));
+        c.lineTo(this.x + this.radius * Math.cos(angle + (3 * Math.PI / 4)), this.y + this.radius * Math.sin(angle + (3 * Math.PI / 4)));
+        c.closePath();
         c.stroke();
+        c.fill();
     }
 
     moveForward() {
