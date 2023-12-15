@@ -11,15 +11,16 @@ class PreyBoid {
     this.y = Math.random() * (canvas.height - this.radius * 2) + this.radius;
     this.speed = 20; // Set the speed
     this.angle = Math.random() * Math.PI * 2; // Set the angle
-    this.visRadius = 50;
-    this.visAngle = 2;
+    this.visRadius = 200;
+    this.visAngle = 1;
   }
 
   drawPreyVisionCone() {
-    c.fillStyle = "red"
+    c.fillStyle = "rgba(255, 0, 0, 0.2)";
     c.moveTo(this.x,this.y);
     c.arc(this.x,this.y,this.visRadius, this.angle - this.visAngle, this.angle + this.visAngle);
     c.lineTo(this.x,this.y);
+    c.closePath();
     c.fill();
   }
 
@@ -36,33 +37,26 @@ class PreyBoid {
   }
 
   edgeCollision() {
-    //Edge collision
-    // Bounce
-    if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
-      this.angle = Math.PI - this.angle; // Reverse the angle
-    }
-    if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
-      this.angle = -this.angle; // Reverse the angle
-    }
-
-    // // Pacman
-    // if (this.x > canvas.width) {
-    //   this.x = 0;
-    // }
-    // if (this.x < 0) {
-    //   this. x = canvas.width;
-    // }
-    // if (this.y > canvas.height) {
-    //   this.y = 0
-    // }
-    // if (this.y < 0) {
-    //   this.y = canvas.height
-    // }
+    // Pacman
+    this.x = (this.x + canvas.width) % canvas.width;
+    this.y = (this.y + canvas.height) % canvas.height;
   }
 
+  PreySeperation() {
+    for (var i = 0; i < numPrey; i++) {
+        var dx = PreyArray[i].x - this.x;
+        var dy = PreyArray[i].y - this.y;
+        var distance = Math.sqrt(dx * dx + dy * dy);
+  
+        if (distance < this.visRadius && Math.abs(Math.atan2(dy, dx) - this.angle) < this.visAngle) {
+          console.log(this, "spotted", PreyArray[i])
+        }
+    }
+  }
 
   takeStep() {
     this.edgeCollision()
+    this.PreySeperation()
 
     // Update the position based on the angle and speed
     this.x += this.speed * Math.cos(this.angle);
@@ -71,7 +65,7 @@ class PreyBoid {
 }
 
 var PreyArray = [];
-var numPrey = 20;
+var numPrey = 2;
 
 for (var i = 0; i < numPrey; i++) {
   var boid = new PreyBoid();
