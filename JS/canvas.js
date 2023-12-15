@@ -16,7 +16,7 @@ class PreyBoid {
   }
 
   drawPreyVisionCone() {
-    c.fillStyle = "red"
+    c.fillStyle = ["green", "pink", "purple", "black"][Math.floor(4 * Math.random())];
     c.moveTo(this.x,this.y);
     c.arc(this.x,this.y,this.visRadius, this.angle - this.visAngle, this.angle + this.visAngle);
     c.lineTo(this.x,this.y);
@@ -24,7 +24,7 @@ class PreyBoid {
   }
 
   drawPreyBoid() {
-    c.fillStyle = "green";
+    c.fillStyle = "red";
     // Triangle
     c.beginPath();
     c.moveTo(this.x + this.radius * Math.cos(this.angle), this.y + this.radius * Math.sin(this.angle));
@@ -83,7 +83,7 @@ function update() {
 //    e = e || window.event;
     requestAnimationFrame(update);
 //  };
-  c.clearRect(0, 0, canvas.width, canvas.height);
+  // c.clearRect(0, 0, canvas.width, canvas.height);
 
   for (var i = 0; i < PreyArray.length; i++) {
     PreyArray[i].takeStep();
