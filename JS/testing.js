@@ -45,28 +45,38 @@ class PreyBoid {
     this.y = (this.y + canvas.height) % canvas.height;
   }
 
+  angleCheck(){
+    if (this.angle > Math.PI * 2){
+      this.angle = 0;
+    }
+    if (this.angle < 0){
+      this.angle = Math.PI * 2;
+    }
+  }
+
   preySeperation() {
     for (var i = 0; i < PreyArray.length; i++) {
       let dY = Math.abs(this.y - PreyArray[i].y)
       let dX = Math.abs(this.x - PreyArray[i].x)
       let angleTo = Math.atan2(dY,dX)
-      if (PreyArray[i] != this && Math.sqrt(dX**2 + dY**2) < this.visRadius && angleTo < (this.angle + this.visAngle) && angleTo > (this.angle - this.visAngle)) {
-        console.log("yuh", this.angle + this.visAngle,">", angleTo)
-        console.log("yuh", this.angle - this.visAngle,"<", angleTo)
+      if (PreyArray[i] != this && Math.sqrt(dX**2 + dY**2) < this.visRadius && angleTo > this.angle - (this.visAngle / 2) && angleTo < this.angle + (this.visAngle / 2)) {
         //console.log(this,"spotted", PreyArray[i])
       }
+      console.log(angleTo,">", this.angle - (this.visAngle / 2), (angleTo > this.angle - (this.visAngle / 2)))
+      console.log(angleTo,"<", this.angle + (this.visAngle / 2), (angleTo < this.angle + (this.visAngle / 2)))
     }
   }
 
   takeStep() {
     if (this == PreyArray[0]) {
       this.edgeCollision()
+      this.angleCheck()
       this.preySeperation()
 
       // Update the position based on the angle and speed
       //this.x += this.speed * Math.cos(this.angle);
       //this.y += this.speed * Math.sin(this.angle);
-      this.angle += 0.01;
+      this.angle -= 0.01;
     }
     else {
       this.x = canvas.width/2;
