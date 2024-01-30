@@ -11,13 +11,175 @@
         }
 
         body {
-            margin:0px;
-            overflow: hidden;
+            margin: 0px;
+            max-width: 100%;
+            overflow-x: hidden;
         }
+
+        ::-webkit-scrollbar {
+        display: none;
+        }
+
+        .canvas {
+            position: relative;
+            border: 0px;
+            padding: none;
+        }
+        
     </style>
 </head>
 <body>
-    <canvas></canvas>
+    <div class="canvas">
+        <canvas></canvas>
+    </div>
+
+    <div class="buttonGroup">
+        <button
+        id = "pauseButton"
+        type="button"
+        class="button"
+        >
+        Pause/Play
+        </button>
+
+        <button
+        id = "highlightBoidButton"
+        type="button"
+        class="button"
+        >
+            Highlight Boid
+        </button>
+        
+        <button
+        id = "avoidWallsButton"
+        type="button"
+        class="button"
+        >
+            Avoid Walls
+        </button>
+
+        <button
+        id = "drawLineButton"
+        type="button"
+        class="button"
+        >
+            Draw Lines
+        </button>
+
+        <button
+        id = "visionConeButton"
+        type="button"
+        class="button"
+        >
+            Vision Cone
+        </button>
+
+        <button
+        id = "avoidanceConeButton"
+        type="button"
+        class="button"
+        >
+            Avoidance Cone
+        </button>
+
+        <button
+        id = "forceVectorButton"
+        type="button"
+        class="button"
+        >
+            Force Vectors
+        </button>
+    </div>
+
+    <br>
+
+    <div class="inputGroup">
+        <label for="seperationInput">Seperation Constant:</label>
+        <input type="number" id="seperationInput" value="0.002" min="0">
+
+        <label for="alignmentInput">Alignment Constant:</label>
+        <input type="number" id="alignmentInput" value="0.01" min="0">
+
+        <label for="cohesionInput">Cohesion Constant:</label>
+        <input type="number" id="cohesionInput" value="0.001" min="0">
+    </div>
+
+    <br>
+
+    <div class="constructorInput">
+        <label for="minSpeedInput">Min Speed:</label>
+        <input type="number" id="minSpeedInput" value="2" min="0">
+
+        <label for="maxSpeedInput">Max Speed:</label>
+        <input type="number" id="maxSpeedInput" value="3" min="0">
+
+        <br> <br>
+
+        <label for="visRadiusInput">Visual Radius:</label>
+        <input type="number" id="visRadiusInput" value="100" min="0">
+
+        <label for="avoidRadiusInput">Avoidance Radius:</label>
+        <input type="number" id="avoidRadiusInput" value="50" min="0">
+
+        <label for="wallAvoidanceInput">Wall Avoidance:</label>
+        <input type="number" id="wallAvoidanceInput" value="0.2">
+    </div>
+
+    <br>
+
+    <script>
+        function generateRandomNumbers() {
+            var numbers = [];
+            for (var i = 0; i < 10; i++) {
+                numbers.push(Math.floor(Math.random() * 100)); // Generates random numbers between 0 and 100
+            }
+            document.getElementById("randomNumbers").innerHTML = "Random Numbers: " + numbers.join(", ");
+            return numbers;
+        }
+    
+        function mergeSort(arr) {
+            if (arr.length <= 1) {
+                return arr;
+            }
+        
+            const mid = Math.floor(arr.length / 2);
+            const left = arr.slice(0, mid);
+            const right = arr.slice(mid);
+        
+            return merge(mergeSort(left), mergeSort(right));
+        }
+    
+        function merge(left, right) {
+            let result = [];
+            let leftIndex = 0;
+            let rightIndex = 0;
+        
+            while (leftIndex < left.length && rightIndex < right.length) {
+                if (left[leftIndex] < right[rightIndex]) {
+                result.push(left[leftIndex]);
+                leftIndex++;
+                }
+                else {
+                    result.push(right[rightIndex]);
+                    rightIndex++;
+                }
+            }
+        
+            return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+        }
+    
+        function sortRandomNumbers() {
+            var numbers = document.getElementById("randomNumbers").innerHTML.split(": ")[1].split(", ").map(Number);
+            var sortedNumbers = mergeSort(numbers);
+            document.getElementById("sortedNumbers").innerHTML = "Sorted Numbers: " + sortedNumbers.join(", ");
+            }
+    </script>
+
+    <button onclick="generateRandomNumbers()">Generate Random Numbers</button>
+    <p id="randomNumbers"></p>
+    <button onclick="sortRandomNumbers()">Sort Numbers using Merge Sort</button>
+    <p id="sortedNumbers"></p>
+
     <script type="module" src="canvas.js"></script>
 </body>
 </html>
