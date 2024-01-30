@@ -1,0 +1,25 @@
+{
+    "indentRainbow.colors": [
+
+
+//trainbow
+        // "rgba(145,216,255,0.2)", // blue
+        // "rgba(255,202,213,0.2)", // pink
+        // "rgba(255,255,255,0.2)", // white
+        // "rgba(255,202,213,0.2)" //pink
+//rainbow
+        "rgba(255,0,0,0.07)", // Red
+        "rgba(252,111,3,0.07)", // Orange
+        "rgba(252, 219, 3,0.07)", // Yellow
+        "rgba(0,255,0,0.07)", // Green
+        "rgba(0,0,255,0.07)", // Blue
+        "rgba(144,3,252,0.07)", // Porpol
+    ],
+    "indentRainbow.errorColor": "rgba(255,0,0,1)",
+    "editor.tabSize": 2,
+    "indentRainbow.indentSetter": {
+
+    },
+    "indentRainbow.lightIndicatorStyleLineWidth": 2
+}
+                                //
