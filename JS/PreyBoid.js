@@ -189,7 +189,7 @@ class PreyBoid{
           this.drawLineToVis();
         }
       }
-      if (this.distBetween <= avoidRadius && this !== preyArray[i]) {
+      if (this.distBetween < avoidRadius && this !== preyArray[i]) {
         this.boidsTooClose.push(preyArray[i]);
         if (settings.drawLineTo) {
           this.drawLineToavoidance();

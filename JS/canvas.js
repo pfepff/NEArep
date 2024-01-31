@@ -39,7 +39,7 @@ document.getElementById("forceVectorButton").addEventListener('click', function(
 });
 
 var preyArray = [];
-var numPrey = 200
+var numPrey = document.getElementById("numBoidsInput").value;
 
 var seperationValue = document.getElementById("seperationInput").value;
 var cohesionValue = document.getElementById("cohesionInput").value;
@@ -51,7 +51,10 @@ var wallAvoidance = document.getElementById("wallAvoidanceInput").value;
 var minSpeed = document.getElementById("minSpeedInput").value;
 var maxSpeed = document.getElementById("maxSpeedInput").value;
 
+var preyArray = [];
+
 function load() {
+  var numPrey = document.getElementById("numBoidsInput").value;
   for (var i = 0; i < numPrey; i++) {
     var obj = new PreyBoid();
     preyArray.push(obj);
@@ -61,6 +64,20 @@ function load() {
 function update() {
   requestAnimationFrame(update);
   if (!settings.pause){
+    numPrey = document.getElementById("numBoidsInput").value;
+
+    if (numPrey !== preyArray.length) {
+      if (numPrey > preyArray.length) {
+        var numToAdd = numPrey - preyArray.length;
+        for (var i = 0; i < numToAdd; i++) {
+          var obj = new PreyBoid();
+          preyArray.push(obj);
+        }
+      } else {
+        preyArray.splice(numPrey);
+      }
+    }
+
     seperationValue = document.getElementById("seperationInput").value;
     cohesionValue = document.getElementById("cohesionInput").value; 
     alignmentValue = document.getElementById("alignmentInput").value;
@@ -70,6 +87,7 @@ function update() {
     wallAvoidance = document.getElementById("wallAvoidanceInput").value;
     minSpeed = document.getElementById("minSpeedInput").value;
     maxSpeed = document.getElementById("maxSpeedInput").value;
+
 
     c.clearRect(0, 0, canvas.width, canvas.height);
 
