@@ -7,10 +7,14 @@ class PreyBoid{
 
     this.size = 4;
     this.pos = {
+      // x: canvas.width/2,
+      // y: canvas.height/2
       x: Math.random() * (canvas.width - this.size * 2) + this.size,
-      y: Math.random() * (canvas.height - this.size * 2) + this.size
+      y:Math.random() * (canvas.height - this.size * 2) + this.size
     };
     this.velocity = {
+      // dx: Math.random() - 0.5,
+      // dy: Math.random() - 0.5
       dx: Math.random() < 0.5 ? -maxSpeed/2 : maxSpeed/2,
       dy: Math.random() < 0.5 ? -maxSpeed/2 : maxSpeed/2
     };

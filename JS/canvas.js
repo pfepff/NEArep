@@ -62,7 +62,14 @@ function load() {
 }
 
 function update() {
+
   requestAnimationFrame(update);
+
+  document.getElementById("resetButton").addEventListener('click', function() {
+    preyArray.length = 0;
+    load();
+  });
+
   if (!settings.pause){
     numPrey = document.getElementById("numBoidsInput").value;
 
