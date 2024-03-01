@@ -1,14 +1,13 @@
-import {c, canvas, preyArray, settings, seperationValue, cohesionValue, alignmentValue, visRadius, avoidRadius, wallAvoidance, maxSpeed, minSpeed} from './canvas.js';
+import {c, canvas, preyArray, settings, seperationValue, cohesionValue, alignmentValue, size, visRadius, avoidRadius, wallAvoidance, maxSpeed, minSpeed} from './canvas.js';
 
 class PreyBoid{
   constructor() {
     this.Frame_Buffer = 1;
     this.stut = 0;
 
-    this.size = 4;
     this.pos = {
-      x: Math.random() * (canvas.width - this.size * 2) + this.size,
-      y: Math.random() * (canvas.height - this.size * 2) + this.size
+      x: Math.random() * (canvas.width - size * 2) + size,
+      y: Math.random() * (canvas.height - size * 2) + size
     };
     this.velocity = {
       dx: Math.random() < 0.5 ? -maxSpeed/2 : maxSpeed/2,
@@ -47,9 +46,9 @@ class PreyBoid{
     }
 
     c.beginPath();
-    c.moveTo(this.pos.x + Math.cos(this.angle) * this.size, this.pos.y + Math.sin(this.angle) * this.size);
-    c.lineTo(this.pos.x + Math.cos(this.angle - (Math.PI * 2 / 3)) * this.size, this.pos.y + Math.sin(this.angle - (Math.PI * 2 / 3)) * this.size);
-    c.lineTo(this.pos.x + Math.cos(this.angle + (Math.PI * 2 / 3)) * this.size, this.pos.y + Math.sin(this.angle + (Math.PI * 2 / 3)) * this.size);
+    c.moveTo(this.pos.x + Math.cos(this.angle) * size, this.pos.y + Math.sin(this.angle) * size);
+    c.lineTo(this.pos.x + Math.cos(this.angle - (Math.PI * 2 / 3)) * size, this.pos.y + Math.sin(this.angle - (Math.PI * 2 / 3)) * size);
+    c.lineTo(this.pos.x + Math.cos(this.angle + (Math.PI * 2 / 3)) * size, this.pos.y + Math.sin(this.angle + (Math.PI * 2 / 3)) * size);
     c.closePath();
     c.fill();
   }

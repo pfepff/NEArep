@@ -46,6 +46,7 @@ var seperationValue = document.getElementById("seperationInput").value;
 var cohesionValue = document.getElementById("cohesionInput").value;
 var alignmentValue = document.getElementById("alignmentInput").value;
 
+var size = document.getElementById("boidSizeInput").value;
 var visRadius = document.getElementById("visRadiusInput").value;
 var avoidRadius = document.getElementById("avoidRadiusInput").value;
 var wallAvoidance = document.getElementById("wallAvoidanceInput").value;
@@ -64,9 +65,17 @@ function load() {
   }
 }
 
-// Update function to handle animation and dynamic boid count
+// Update function handles animation and dynamic boid count every frame
 function update() {
+
   requestAnimationFrame(update);
+
+  // Resets boid positions
+  document.getElementById("resetButton").addEventListener('click', function() {
+    preyArray.length = 0;
+    load();
+  });
+
   if (!settings.pause){
     numPrey = document.getElementById("numBoidsInput").value;
 
@@ -83,6 +92,7 @@ function update() {
       }
     }
 
+    size = document.getElementById("boidSizeInput").value;
     seperationValue = document.getElementById("seperationInput").value;
     cohesionValue = document.getElementById("cohesionInput").value; 
     alignmentValue = document.getElementById("alignmentInput").value;
@@ -101,8 +111,7 @@ function update() {
     }
   }
 }
-//////////////////////
 
 load();
 update();
-export {c, canvas, preyArray, settings, seperationValue, cohesionValue, alignmentValue, visRadius, avoidRadius, wallAvoidance, maxSpeed, minSpeed};
+export {c, canvas, preyArray, settings, seperationValue, cohesionValue, alignmentValue, size, visRadius, avoidRadius, wallAvoidance, maxSpeed, minSpeed};
