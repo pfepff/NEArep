@@ -5,30 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boids</title>
     <style type="text/css">
-        /* Style for the canvas element */
         canvas {
-            border: 1px solid rgb(0, 0, 0); /* Add a solid black border around the canvas */
-            background-color: rgb(35, 35, 38); /* Set the background color of the canvas to a dark shade */
+            border: 1px solid rgb(0, 0, 0);
+            background-color: rgb(35, 35, 38);
         }
-    
-        /* Style for the body element */
+
         body {
-            margin: 0px; /* Remove any margins from the body */
-            max-width: 100%; /* Set the maximum width of the body to 100% of the viewport */
-            overflow-x: hidden; /* Hide horizontal overflow content */
+            margin: 0px;
+            max-width: 100%;
+            overflow-x: hidden;
         }
-    
-        /* Style for the scrollbar */
+
         ::-webkit-scrollbar {
-            display: none; /* Hide the scrollbar */
+        display: none;
         }
-    
-        /* Style for elements with the class 'canvas' */
+
         .canvas {
-            position: relative; /* Set the positioning of the canvas to relative */
-            border: 0px; /* Remove the border from the canvas */
-            padding: none; /* Remove padding from the canvas */
+            position: relative;
+            border: 0px;
+            padding: none;
         }
+        
     </style>
 </head>
 <body>
@@ -43,14 +40,6 @@
         class="button"
         >
         Pause/Play
-        </button>
-
-        <button
-        id = "resetButton"
-        type="button"
-        class="button"
-        >
-        Reset
         </button>
 
         <button
@@ -126,9 +115,6 @@
 
         <br> <br>
 
-        <label for="boidSizeInput">Boid Size:</label>
-        <input type="number" id="boidSizeInput" value="4" min="0">
-
         <label for="visRadiusInput">Visual Radius:</label>
         <input type="number" id="visRadiusInput" value="100" min="0">
 
@@ -144,7 +130,7 @@
 
     <br>
 
-    <!-- <script>
+    <script>
         function generateRandomNumbers() {
             var numbers = [];
             for (var i = 0; i < 10; i++) {
@@ -195,7 +181,7 @@
     <button onclick="generateRandomNumbers()">Generate Random Numbers</button>
     <p id="randomNumbers"></p>
     <button onclick="sortRandomNumbers()">Sort Numbers using Merge Sort</button>
-    <p id="sortedNumbers"></p> -->
+    <p id="sortedNumbers"></p>
 
     <script type="module" src="canvas.js"></script>
 </body>
